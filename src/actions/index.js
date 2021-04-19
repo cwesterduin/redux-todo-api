@@ -1,4 +1,3 @@
-export const addTodo = content => ({ type: 'ADD_TODO', payload: content })
 export const toggleTodo = id => ({ type: 'TOGGLE_TODO', payload: id })
 export const deleteTodo = id => ({ type: 'DELETE_TODO', payload: id })
 export const editTodo = content => ({ type: 'EDIT_TODO', payload: content })
@@ -22,3 +21,29 @@ export const fetchTodos = () => {
         }
     }
 }
+
+export const addTodo = (content) => {
+    return async (dispatch) => {
+        try {
+            const options = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({title: content.title, body: content.body})
+            }
+            const res = await fetch('http://localhost:3000/todos', options)
+            const data = await res.json()
+            let newTodo = data
+            console.log(newTodo)
+            dispatch({
+                type: 'ADD_TODO',
+                payload: newTodo
+            })
+        } catch (err) {
+            dispatch({
+                type: 'SET_ERROR',
+                payload: err
+            })
+        }
+    }
+}
+
