@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Todo, AddTodo } from '..'
-import { useSelector } from 'react-redux'
 import './style.css'
 
-const TodoList = () => {
-  const todos = useSelector((state) => state);
+const TodoList = ({ todos }) => {
+  console.log(todos)
   const todoList = todos.map((todo, i) => (
     <Todo
       key={i}

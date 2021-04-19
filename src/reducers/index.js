@@ -1,5 +1,9 @@
 const todoState = (state=[], action) => {
     switch (action.type) {
+      case 'LOAD_TODOS':
+            return ([
+                ...action.payload             
+            ])
       case 'ADD_TODO':
         return state.concat([action.payload])
       case 'TOGGLE_TODO':
