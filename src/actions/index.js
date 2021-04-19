@@ -1,5 +1,3 @@
-export const editTodo = content => ({ type: 'EDIT_TODO', payload: content })
-
 export const fetchTodos = () => {
     return async (dispatch) => {
         try {
@@ -77,6 +75,31 @@ export const toggleTodo = (id) => {
                 payload: id
             })
         } catch (err) {
+            dispatch({
+                type: 'SET_ERROR',
+                payload: err
+            })
+        }
+    }
+}
+
+export const editTodo = (content) => {
+    return async (dispatch) => {
+        try {
+            const id = content.id
+            console.log(content.title, content.body)
+            const options = {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({title: content.title, body: content.body})
+            }
+            await fetch(`http://localhost:3000/todos/${id}`, options)
+            dispatch({
+                type: 'EDIT_TODO',
+                payload: content
+            })
+        } catch (err) {
+            console.log(err)
             dispatch({
                 type: 'SET_ERROR',
                 payload: err

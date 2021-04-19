@@ -27,7 +27,7 @@ const Todo = ({ title, body, completed, todoId }) => {
       </td>
     </tr>
   ) : (
-    <AddTodo edit={{title, body, setEditing}} newId={todoId} />
+    <AddTodo edit={{title, body, todoId, setEditing}} />
   );
 };
 

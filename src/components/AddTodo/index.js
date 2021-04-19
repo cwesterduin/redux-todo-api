@@ -9,14 +9,14 @@ const AddTodo = ({ edit }) => {
 
   function submitTodo(e) {
     e.preventDefault();
-    dispatch(addTodo({ title, body, completed: false}));
+    dispatch(addTodo({ title, body}));
     setTitle("");
     setBody("");
   }
 
   function saveTodo(e) {
     e.preventDefault();
-    dispatch(editTodo({ title, body}));
+    dispatch(editTodo({ title, body, id: edit.todoId }));
     edit.setEditing(false)
   }
 
