@@ -1,4 +1,3 @@
-export const toggleTodo = id => ({ type: 'TOGGLE_TODO', payload: id })
 export const editTodo = content => ({ type: 'EDIT_TODO', payload: content })
 
 export const fetchTodos = () => {
@@ -6,7 +5,7 @@ export const fetchTodos = () => {
         try {
             const res = await fetch('http://localhost:3000/todos')
             const data = await res.json()
-            let newTodosArray = data.todos.map(todo => ({ id: todo.id, title: todo.title, body: todo.body}))
+            let newTodosArray = data.todos.map(todo => ({ id: todo.id, title: todo.title, body: todo.body, completed: todo.completed}))
             console.log(newTodosArray)
             dispatch({
                 type: 'LOAD_TODOS',
@@ -66,3 +65,22 @@ export const deleteTodo = (id) => {
 }
 
 
+export const toggleTodo = (id) => {
+    return async (dispatch) => {
+        try {
+            const options = {
+                method: 'PATCH',
+            }
+            await fetch(`http://localhost:3000/todos/${id}/toggle`, options)
+            dispatch({
+                type: 'TOGGLE_TODO',
+                payload: id
+            })
+        } catch (err) {
+            dispatch({
+                type: 'SET_ERROR',
+                payload: err
+            })
+        }
+    }
+}

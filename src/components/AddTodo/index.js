@@ -2,21 +2,21 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { editTodo, addTodo } from "../../actions";
 
-const AddTodo = ({ newId, edit }) => {
+const AddTodo = ({ edit }) => {
   const [title, setTitle] = useState(edit ? edit.title : "");
   const [body, setBody] = useState(edit ? edit.body : "");
   const dispatch = useDispatch();
 
   function submitTodo(e) {
     e.preventDefault();
-    dispatch(addTodo({ title, body, completed: false, id: newId }));
+    dispatch(addTodo({ title, body, completed: false}));
     setTitle("");
     setBody("");
   }
 
   function saveTodo(e) {
     e.preventDefault();
-    dispatch(editTodo({ title, body, id: newId }));
+    dispatch(editTodo({ title, body}));
     edit.setEditing(false)
   }
 
