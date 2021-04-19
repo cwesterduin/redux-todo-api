@@ -2,6 +2,6 @@
 
 ## redux todo app with external API and database
 
-- [ ] implemenet CRUD functionality with API calls (GET, POST, PATCH, DELETE)
-- [ ] persist application state in database
+- [x] implemenet CRUD functionality with API calls (GET, POST, PATCH, DELETE)
+- [x] persist application state in database
 - [ ] good test covergae
